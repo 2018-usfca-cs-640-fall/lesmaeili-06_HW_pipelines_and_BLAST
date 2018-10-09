@@ -1,0 +1,6 @@
+language: shell
+sudo: false
+script:
+  - find . -type f -name "*.sh" | grep '.' || ( echo ERROR No sh files found. && exit 1 )
+  - for file in $(find . -type f -name "*.sh"); do shellcheck $file; done;
+
