@@ -33,3 +33,9 @@ for f in data/trimmed/*.fastq; do
 	echo $f 
 done
 
+or file in data/fasta_files/ERR1942298.fasta
+do
+ blastn -db /blast-db/nt -num_threads 2 -outfmt '10 sscinames std' -out output/Blast_results/"$(basename -s .fasta "$file").csv" -max_target_seqs 1 -negative_gilist /blast-db/2018-09-19_environmental_sequence.gi -query "$file"  
+ echo "checking on one file"
+done 
+
