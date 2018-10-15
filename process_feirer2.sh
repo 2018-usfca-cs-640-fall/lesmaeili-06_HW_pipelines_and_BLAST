@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # !/bin/bash
 # Leila Esmaeili
 # HW6 _Fall_2018
@@ -66,3 +67,11 @@ do
  echo "checking on one file"
 done 
 
+=======
+#!/bin/bash
+for SRA_number in $(cut -f 6 data/metadata/fierer_forensic_hand_mouse_SraRunTable.txt | tail -n +2)
+do
+    fastq-dump -v $SRA_number -O data/raw_data
+done
+
+>>>>>>> c81d6d75bc36111e616bd8b3cec1b1c736134ba4
