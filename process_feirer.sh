@@ -5,30 +5,30 @@
 # email: lesmaeili@dons.usfca.edu
 
 # exclude first line
-for SRA_number in $(cut -f 6 data/metadata/fierer_forensic_hand_mouse_SraRunTable.txt | tail -n +2)
-do
-    fastq-dump -v $SRA_number -O data/raw_data
-done
+#for SRA_number in $(cut -f 6 data/metadata/fierer_forensic_hand_mouse_SraRunTable.txt | tail -n +2)
+#do
+#    fastq-dump -v $SRA_number -O data/raw_data
+#done
 
-echo
-echo
-echo "done downloading data"
-echo 
-echo
+#echo
+#echo
+#echo "done downloading data"
+#echo 
+#echo
 
 
 # Apply fastQ to all files
-echo " apply fast! to all files"
-fastqc data/raw_data/*.fastq --outdir=output/fastqc
+#echo " apply fast! to all files"
+#fastqc data/raw_data/*.fastq --outdir=output/fastqc
 
 #  Trim files
-#echo " trim files"
-#for f in data/raw_data/*; do
-#	B="$(cut -d'/' -f3 <<<"$f")"
-#	echo $B
+echo " trim files"
+for f in data/raw_data/*; do
+ B="$(cut -d'/' -f3 <<<"$f")"
+	echo $B
 	
-#	TrimmomaticSE -threads 2 -phred33 $f data/trimmed/$(basename -s .fastq $B).trim.fastq LEADING:5 TRAILING:5 SLIDINGWINDOW:8:25 MINLEN:150
-#done
+ 	TrimmomaticSE -threads 2 -phred33 $f data/trimmed/$(basename -s .fastq $B).trim.fastq LEADING:5 TRAILING:5 SLIDINGWINDOW:8:25 MINLEN:150
+ done
 
 #  Convert FastQ into Fasta
 #echo " convert fastQ into  Fasta"
