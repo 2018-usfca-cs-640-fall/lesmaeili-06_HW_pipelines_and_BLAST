@@ -22,23 +22,28 @@
 #fastqc data/raw_data/*.fastq --outdir=output/fastqc
 
 #  Trim files
-echo " trim files"
-for f in data/raw_data/*; do
- B="$(cut -d'/' -f3 <<<"$f")"
-	echo $B
+#echo " trim files"
+#for f in data/raw_data/*; do
+# B="$(cut -d'/' -f3 <<<"$f")"
+#	echo $B
 	
- 	TrimmomaticSE -threads 2 -phred33 $f data/trimmed/$(basename -s .fastq $B).trim.fastq LEADING:5 TRAILING:5 SLIDINGWINDOW:8:25 MINLEN:150
- done
+# 	TrimmomaticSE -threads 2 -phred33 $f data/trimmed/$(basename -s .fastq $B).trim.fastq LEADING:5 TRAILING:5 SLIDINGWINDOW:8:25 MINLEN:150
+# done
+echo
+echo
+echo "done with trim"
+echo
+echo
 
 #  Convert FastQ into Fasta
-#echo " convert fastQ into  Fasta"
-#for f in data/trimmed/*.fastq; do
-#	B="$(cut -d'/' -f3 <<<"$f")"
-#	C="$(cut -d'.' -f1 <<<"$B")"
-#	#echo $C 
-#	bioawk -c fastx '{print ">"$name"\n"$seq}' $f > data/trimmed/$C.trim.fasta
-#	echo $f 
-#done
+echo " convert fastQ into  Fasta"
+for f in data/trimmed/*.fastq; do
+	B="$(cut -d'/' -f3 <<<"$f")"
+	C="$(cut -d'.' -f1 <<<"$B")"
+	#echo $C 
+	bioawk -c fastx '{print ">"$name"\n"$seq}' $f > data/trimmed/$C.trim.fasta
+	echo $f 
+done
 
 #or file in data/fasta_files/ERR1942298.fasta
 #do
